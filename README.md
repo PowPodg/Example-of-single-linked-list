@@ -2,7 +2,7 @@
 
 `myList<type>lst`
 
-`add_front(value),  lst.add_back(value), `
+`add_front(value),  add_back(value), `
 
 `insert_index(value, index), delete_index(index) `
 
