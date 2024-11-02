@@ -22,7 +22,6 @@ public:
 	T& operator [](const int index);
 private:
 	//------------
-	template<typename T>
 	class Node
 	{
 	public:
@@ -32,7 +31,53 @@ private:
 		Node(T data = T(), Node* pAddr = nullptr) :Data{ data }, pAddr_next_node{ pAddr } {}
 	};
 	//---------------
-	Node<T>* Head;
+	Node* Head;
 	int Size;
+
+public:
+	//---------------------
+	class Iterator
+	{
+	public:
+		Iterator(Node* node) :t_node(node) {}
+		//----------------
+		Iterator& operator++() {
+			assert(t_node != nullptr);
+			t_node = t_node->pAddr_next_node;
+			return *this;
+		}
+		//----------------
+		Iterator operator++(int) { 
+			assert(t_node != nullptr);
+			auto this_cp = *this;
+		    t_node = t_node->pAddr_next_node;
+			return this_cp;
+		}
+		//-----------------------
+		bool operator!=(const Iterator& in) const {
+			return !operator==(in);
+		}
+		//------------------------
+		T& operator*() const {
+			assert(t_node != nullptr);
+			return t_node->Data;
+		}
+		//-----------------------------
+		bool operator==(const Iterator& in) const {
+			if (this == &in) return true;
+			return t_node == in.t_node;
+		}
+		//-----------------------------
+	private:
+		Node* t_node;
+	};
+	//---------------------
+	const Iterator begin() const {
+		return Iterator(Head);
+	}
+	const Iterator end() const {
+		return Iterator(nullptr);
+	}
+
 };
 

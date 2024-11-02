@@ -18,15 +18,15 @@ void myList<T>::add_back(T data)
 {
 	if (Head == nullptr)
 	{
-		Head = new Node<T>(data);
+		Head = new Node(data);
 	}
 	else {
-		Node<T>* temp_node = Head;
+		Node* temp_node = Head;
 		while (temp_node->pAddr_next_node != nullptr)
 		{
 			temp_node = temp_node->pAddr_next_node;
 		}
-		temp_node->pAddr_next_node = new Node<T>(data);
+		temp_node->pAddr_next_node = new Node(data);
 	}
 	Size++;
 }
@@ -34,7 +34,7 @@ void myList<T>::add_back(T data)
 template<typename T>
 void myList<T>::add_front(T data)
 {
-	Head = new Node<T>(data,Head);
+	Head = new Node(data,Head);
 	Size++;
 }
 
@@ -49,14 +49,14 @@ LIST_Status myList<T>::insert_index(T data, const int index)
 	}
 	else if (index>0)
 	{
-		Node<T>* node_temp = Head;
+		Node* node_temp = Head;
 		int ind = index-1;
 		while(ind)
 		{
 			node_temp = node_temp->pAddr_next_node;
 			ind--;
 		}
-		node_temp->pAddr_next_node = new Node<T>(data, node_temp->pAddr_next_node);
+		node_temp->pAddr_next_node = new Node(data, node_temp->pAddr_next_node);
 		Size++;
 		return LST_OK;
 	}
@@ -76,14 +76,14 @@ LIST_Status myList<T>::delete_index(const int index)
 	}
 	else if (index > 0)
 	{
-		Node<T>* node_temp = Head;
+		Node* node_temp = Head;
 		int ind = index - 1;
 		while (ind)
 		{
 			node_temp = node_temp->pAddr_next_node;
 			ind--;
 		}
-		Node<T>* node_del = node_temp->pAddr_next_node;
+		Node* node_del = node_temp->pAddr_next_node;
 		node_temp->pAddr_next_node = node_del->pAddr_next_node;
 		delete node_del;
 		Size--;
@@ -98,7 +98,7 @@ LIST_Status myList<T>::delete_index(const int index)
 template<typename T>
 void myList<T>::del_front()
 {
-	Node<T>* temp_node = Head;
+	Node* temp_node = Head;
 	Head = Head->pAddr_next_node;
 	delete temp_node;
 	Size--;
@@ -125,7 +125,7 @@ T& myList<T>::operator[](const int index)
 	if(index>=0)
 	{
 		int count = 0;
-		Node<T>* temp_node = Head;
+		Node* temp_node = Head;
 		while (temp_node != nullptr)
 		{
 			if (count == index)
