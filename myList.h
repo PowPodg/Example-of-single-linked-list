@@ -64,7 +64,7 @@ public:
 		}
 		//-----------------------------
 		bool operator==(const Iterator& in) const {
-			if (this == &in) return true;
+			//if (this == in) return true;
 			return t_node == in.t_node;
 		}
 		//-----------------------------
