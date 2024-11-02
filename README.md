@@ -1,13 +1,20 @@
 # Example of single-linked list implementation in C++
 
-$${\color{green} Range-based &ensp;for&ensp; loop,&ensp;&ensp; postfix &ensp;increment, &ensp;&ensp; prefix&ensp; increment  }$$<br />
+<h3 align="left"> 
+    -Range-based for loop, postfix increment, prefix increment
+</h3><br />
 
-`myList<type>lst`<br />
-`add_front(value)`<br />
-`add_back(value)`<br />
-`insert_index(value, index)`<br />
-`delete_index(index)`<br />
-`del_front()` <br />
-`del_back()` <br />
-`clear_all()`<br />
-`get_size()`
+
+```diff
++ myList<type>lst
++ add_front(value)
++ add_back(value)
++ insert_index(value, index)
++ delete_index(index)
++ del_front()
++ del_back()
++ clear_all()
++ get_size()
+
+```
+ize()`
