@@ -15,6 +15,5 @@
 + del_back()
 + clear_all()
 + get_size()
-
 ```
 
