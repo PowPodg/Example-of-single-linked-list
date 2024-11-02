@@ -31,5 +31,6 @@ int main()
 		cout << i << endl;
 	}
 
+	cin.get();
 }
 
