@@ -1,6 +1,6 @@
 # Example of single-linked list implementation in C++
 
-$${\color{green} Range-based for loop,&ensp postfix increment, &ensp prefix increment  }$$<br />
+$${\color{green} Range-based &ensp;for&ensp; loop,&ensp;&ensp; postfix &ensp;increment, &ensp;&ensp; prefix&ensp; increment  }$$<br />
 
 `myList<type>lst`<br />
 `add_front(value)`<br />
