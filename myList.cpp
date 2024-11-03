@@ -1,4 +1,5 @@
 #include "myList.h"
+#include <initializer_list>
 
 template<typename T>
 myList<T>::myList()
@@ -39,6 +40,24 @@ void myList<T>::operator=(myList&& pml)
 		this->add_back(i);
 	}
 	pml.clear_all();
+}
+//-------------------------------------
+template<typename T>
+myList<T>::myList(initializer_list<T> lst)
+{
+	for (auto& i : lst)
+	{
+		this->add_back(i);
+	}
+}
+template<typename T>
+void myList<T>::operator=(initializer_list<T> lst)
+{
+	clear_all();
+	for (auto& i : lst)
+	{
+		this->add_back(i);
+	}
 }
 //----------------------
 template<typename T>

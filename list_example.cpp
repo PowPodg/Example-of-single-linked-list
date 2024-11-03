@@ -6,7 +6,10 @@ using namespace std;
 
 int main()
 {
-	myList<int>  mlst;
+	myList<int>  mlst { 1, 3, 5 };
+	//Assigning new values
+	mlst = { 2, 44, 11 };
+
 	mlst.add_back(42);
 	mlst.add_back(3);
 	mlst.add_back(10);

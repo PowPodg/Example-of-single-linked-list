@@ -1,5 +1,8 @@
 #pragma once
 #include <assert.h>
+#include <initializer_list>
+
+using namespace std;
 
 typedef enum {
 	LST_OK,
@@ -15,6 +18,8 @@ public:
 	void operator = (const myList&);
 	myList(myList&&);
 	void operator = (myList&&);
+	myList(initializer_list<T>);
+	void operator = (initializer_list<T>);
 	~myList();
 
 	void add_back(T data);
