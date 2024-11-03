@@ -1,4 +1,6 @@
 #pragma once
+#include <assert.h>
+
 typedef enum {
 	LST_OK,
 	LST_ERROR,
@@ -9,6 +11,10 @@ class myList
 {
 public:
 	myList();
+	myList(const myList&); 
+	void operator = (const myList&);
+	myList(myList&&);
+	void operator = (myList&&);
 	~myList();
 
 	void add_back(T data);
@@ -27,7 +33,6 @@ private:
 	public:
 		Node* pAddr_next_node;
 		T Data;
-
 		Node(T data = T(), Node* pAddr = nullptr) :Data{ data }, pAddr_next_node{ pAddr } {}
 	};
 	//---------------
@@ -47,7 +52,7 @@ public:
 			return *this;
 		}
 		//----------------
-		Iterator operator++(int) { 
+		Iterator operator++(int) {  
 			assert(t_node != nullptr);
 			auto this_cp = *this;
 		    t_node = t_node->pAddr_next_node;
@@ -55,16 +60,18 @@ public:
 		}
 		//-----------------------
 		bool operator!=(const Iterator& in) const {
-			return !operator==(in);
+			//return t_node != in.t_node;
+			//return !operator==(in);
+			return !(*this==in);
 		}
 		//------------------------
-		T& operator*() const {
+		T& operator*() const { 
 			assert(t_node != nullptr);
 			return t_node->Data;
 		}
 		//-----------------------------
 		bool operator==(const Iterator& in) const {
-			//if (this == in) return true;
+			//if (this == &in) return true;
 			return t_node == in.t_node;
 		}
 		//-----------------------------

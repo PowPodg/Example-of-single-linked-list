@@ -1,10 +1,46 @@
 #include "myList.h"
+using namespace std;
 
 template<typename T>
 myList<T>::myList()
 {
 	Size = 0;
 	Head = nullptr;
+}
+//------------------------
+template<typename T>
+myList<T>::myList(const myList& ml)
+{
+	for (auto& i : ml)
+	{
+		this->add_back(i);
+	}
+	cout << "copy\n";
+}
+template<typename T>
+void myList<T>::operator=(const myList& ml)
+{
+	for (auto& i : ml)
+	{
+		this->add_back(i);
+	}
+}
+//-------------------------------
+template<typename T>
+myList<T>::myList(myList&& pml)
+{
+	*this = pml;
+	pml.clear_all();
+}
+//------------------------
+template<typename T>
+void myList<T>::operator=(myList&& pml)
+{
+	for (auto& i : pml)
+	{
+		this->add_back(i);
+	}
+	pml.clear_all();
 }
 //----------------------
 template<typename T>
@@ -34,24 +70,23 @@ void myList<T>::add_back(T data)
 template<typename T>
 void myList<T>::add_front(T data)
 {
-	Head = new Node(data,Head);
+	Head = new Node(data, Head);
 	Size++;
 }
-
 //---------------------------------------
 template<typename T>
 LIST_Status myList<T>::insert_index(T data, const int index)
 {
-	if (index==0)
+	if (index == 0)
 	{
 		add_front(data);
 		return LST_OK;
 	}
-	else if (index>0)
+	else if (index > 0&& index < this->Size)
 	{
 		Node* node_temp = Head;
-		int ind = index-1;
-		while(ind)
+		int ind = index - 1;
+		while (ind)
 		{
 			node_temp = node_temp->pAddr_next_node;
 			ind--;
@@ -60,10 +95,10 @@ LIST_Status myList<T>::insert_index(T data, const int index)
 		Size++;
 		return LST_OK;
 	}
-	else if (index<0)
+	else if (index < 0|| index >= this->Size)
 	{
 		return LST_ERROR;
-	}	
+	}
 }
 //------------------------------------------------------------
 template<typename T>
@@ -74,7 +109,7 @@ LIST_Status myList<T>::delete_index(const int index)
 		del_front();
 		return LST_OK;
 	}
-	else if (index > 0)
+	else if (index > 0 && index < this->Size)
 	{
 		Node* node_temp = Head;
 		int ind = index - 1;
@@ -89,7 +124,7 @@ LIST_Status myList<T>::delete_index(const int index)
 		Size--;
 		return LST_OK;
 	}
-	else if (index < 0)
+	else if (index < 0 || index >= this->Size)
 	{
 		return LST_ERROR;
 	}
@@ -122,7 +157,7 @@ void myList<T>::clear_all()
 template<typename T>
 T& myList<T>::operator[](const int index)
 {
-	if(index>=0)
+	if (index >= 0)
 	{
 		int count = 0;
 		Node* temp_node = Head;
