@@ -1,5 +1,4 @@
 #include "myList.h"
-using namespace std;
 
 template<typename T>
 myList<T>::myList()
@@ -15,7 +14,6 @@ myList<T>::myList(const myList& ml)
 	{
 		this->add_back(i);
 	}
-	cout << "copy\n";
 }
 template<typename T>
 void myList<T>::operator=(const myList& ml)
