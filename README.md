@@ -15,6 +15,7 @@
 + del_back()
 + clear_all()
 + get_size()
-+ Sort()
++ Sort() - Using a vector
++ Sort_1()  - Without using a vector
 ```
 

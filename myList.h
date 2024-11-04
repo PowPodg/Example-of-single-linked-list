@@ -36,6 +36,9 @@ public:
 
 	void Sort();
 	void Sort(bool f(T a, T b));
+
+	void Sort_1(void);
+	void Sort_1(bool f(T a, T b));
 private:
 	//------------
 	class Node

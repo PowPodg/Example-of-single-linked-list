@@ -227,3 +227,47 @@ void myList<T>::Sort(bool f(T a, T b))
 		++cnt;
 	}
 }
+//--------------------------------
+template<typename T>
+void myList<T>::Sort_1(void)
+{
+	T* temp_arr = new T[Size];
+	int cnt = 0;
+	for (auto& i : *this)
+	{
+		temp_arr[cnt] = i;
+		++cnt;
+	}
+	sort(temp_arr, &temp_arr[Size]);
+	cnt = 0;
+	for (auto& i : *this)
+	{
+		i = temp_arr[cnt];
+		++cnt;
+	}
+
+	delete[] temp_arr;
+	temp_arr = nullptr;
+}
+//--------------------------------------
+template<typename T>
+void myList<T>::Sort_1(bool f(T a, T b))
+{
+	T* temp_arr = new T[Size];
+	int cnt = 0;
+	for (auto& i : *this)
+	{
+		temp_arr[cnt] = i;
+		++cnt;
+	}
+	sort(temp_arr, &temp_arr[Size], f);
+	cnt = 0;
+	for (auto& i : *this)
+	{
+		i = temp_arr[cnt];
+		++cnt;
+	}
+
+	delete[] temp_arr;
+	temp_arr = nullptr;
+}
