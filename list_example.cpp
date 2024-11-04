@@ -20,6 +20,15 @@ int main()
 		cout << mlst[i] << "  ";
 	}
 	cout << "\n\n";
+	
+	mlst.Sort([](int a, int b) {return a > b; });
+
+	cout << "Range-based for loop after sorting: " << "\n";	
+	for (auto& i : mlst)
+	{
+		cout << i << "  ";
+	}
+	cout << endl;
 
 	auto it = mlst.begin();
 	it++;
@@ -27,12 +36,6 @@ int main()
 	
 	++it;
 	cout << "Prefix increment: " << *it << "\n\n";
-
-	cout << "Range-based for loop: " << "\n";
-	for (auto& i : mlst)
-	{
-		cout << i << endl;
-	}
 
 	cin.get();
 }

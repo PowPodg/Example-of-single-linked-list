@@ -1,7 +1,7 @@
 # Example of single-linked list implementation in C++
 
 <h3 align="left"> 
-    -Range-based for loop, postfix increment, prefix increment, move constructor
+    Range-based for loop, postfix increment, prefix increment, move constructor, sorting
 </h3><br />
 
 

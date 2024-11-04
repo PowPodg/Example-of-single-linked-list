@@ -1,6 +1,8 @@
 #pragma once
 #include <assert.h>
 #include <initializer_list>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -31,6 +33,9 @@ public:
 	void clear_all();
 	int get_size() { return Size; }
 	T& operator [](const int index);
+
+	void Sort();
+	void Sort(bool f(T a, T b));
 private:
 	//------------
 	class Node

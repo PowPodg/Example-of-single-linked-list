@@ -189,3 +189,41 @@ T& myList<T>::operator[](const int index)
 		}
 	}
 }
+//----------------------------------------
+template<typename T>
+void myList<T>::Sort()
+{
+	vector<T> temp_arr(Size);
+	int cnt = 0;
+	for (auto& i : *this)
+	{
+		temp_arr.at(cnt) = i;
+		++cnt;
+	}
+	sort(temp_arr.begin(), temp_arr.end());
+	cnt = 0;
+	for (auto& i : *this)
+	{
+		i = temp_arr.at(cnt);
+		++cnt;
+	}
+}
+//----------------------------------------
+template<typename T>
+void myList<T>::Sort(bool f(T a, T b))
+{
+	vector<T> temp_arr(Size);
+	int cnt = 0;
+	for (auto& i : *this)
+	{
+		temp_arr.at(cnt) = i;
+		++cnt;
+	}
+	sort(temp_arr.begin(), temp_arr.end(), f);
+	cnt = 0;
+	for (auto& i : *this)
+	{
+		i = temp_arr.at(cnt);
+		++cnt;
+	}
+}
