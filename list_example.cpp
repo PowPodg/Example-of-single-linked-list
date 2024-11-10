@@ -1,8 +1,8 @@
-﻿#include <assert.h>
-#include <iostream>
-#include "myList.cpp"
+﻿#include <iostream>
+#include "myList.h"
 
 using namespace std;
+using namespace mlst;
 
 int main()
 {
