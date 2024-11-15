@@ -275,4 +275,100 @@ namespace mlst {
 		delete[] temp_arr;
 		temp_arr = nullptr;
 	}
+//----------------------------------------------------------------
+template<typename T>
+	LIST_Status myList<T>::toFile(const std::string& file_name)
+	{
+		int sz = sizeof(T);
+		ofstream out_f;
+		out_f.open(file_name, ios_base::binary);
+		if (out_f.is_open())
+		{
+			auto tp = typeid(T).name();
+			string fin(tp);
+
+			if (strstr(fin.c_str(), "std::basic_string") != 0)
+			{
+				for (auto& it : *this)
+				{
+					string st = " "; st = it;
+					int sz_st = st.size();
+					out_f.write((char*)&sz_st, sizeof(sz_st));
+					out_f.write(&st[0], sz_st);
+				}
+			}
+			else
+			{
+				if (sz <= sizeof(int64_t))
+				{
+					for (auto& it : *this)
+					{
+						out_f.write((char*)&sz, sz);
+						out_f.write((char*)&it, sz);
+					}
+				}
+				else
+				{
+					//for user objects ......Not yet implemented!!
+					return FILE_ERROR;
+				}
+			}
+			out_f.close();
+		}
+		else return FILE_ERROR;
+		return LST_OK;
+	}
+//---------------------------
+template<typename T>
+	LIST_Status myList<T>::fromFile(const std::string& file_name, T** data_o, int& index)
+	{
+		*data_o = new T[Size];
+		int sz_var = sizeof(T);
+		index = 0;
+		ifstream in_f;
+		in_f.open(file_name, ios_base::binary);
+		in_f.seekg(0);
+		if (in_f.is_open()) {
+			auto tp = typeid(T).name();
+			string fin(tp);
+			if (strstr(fin.c_str(), "std::basic_string") != 0)
+			{
+				while (!in_f.eof()) {
+					int sz = 0;
+					in_f.read((char*)&sz, sizeof(sz));
+					string data_read(sz, ',');
+					in_f.read(&data_read[0], sz);
+					for (size_t i = 0; i < sz; i++)
+					{
+						(*data_o)[index] += data_read[i];
+					}
+					++index;
+				}
+				if (index > 1) --index;
+			}
+			else
+			{
+				if (sz_var <= sizeof(int64_t))
+				{
+					while (!in_f.eof()) {
+						int sz = 0;
+						in_f.read((char*)&sz, sizeof(sz));
+						in_f.read((char*)&(*data_o)[index], sz);
+						++index;
+					}
+					if (index > 1) --index;
+				}
+				else
+				{
+					//for user objects ......Not yet implemented!!
+					return FILE_ERROR;
+				}
+			}
+			in_f.close();
+		}
+		else return FILE_ERROR;
+		return LST_OK;
+	}
 }
+//--------------------------------------------------------
+

@@ -37,6 +37,18 @@ int main()
 	++it;
 	cout << "Prefix increment: " << *it << "\n\n";
 
+	//write to file
+	string file_out = "out.bin";
+	mlst.toFile(file_out);
+	//read from file to T array
+	int* data_arr;
+	int size_arr;
+	auto res = mlst.fromFile(file_out, &data_arr, size_arr);
+	for (int i = 0; i < size_arr; i++)
+	{
+		cout << data_arr[i] << endl;
+	}
+
 	cin.get();
 }
 

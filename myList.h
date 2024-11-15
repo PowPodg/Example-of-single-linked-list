@@ -2,12 +2,15 @@
 #include <vector>
 #include <algorithm>
 #include <assert.h>
+#include <fstream>
+#include <typeinfo>
 
 namespace mlst {
 
 	typedef enum {
 		LST_OK,
 		LST_ERROR,
+		FILE_ERROR
 	} LIST_Status;
 
 	template<typename T>
@@ -38,6 +41,9 @@ namespace mlst {
 
 		void Sort_1(void);
 		void Sort_1(bool f(T a, T b));
+
+		LIST_Status toFile(const std::string&);
+		LIST_Status fromFile(const std::string&, T**, int&);
 	private:
 		//------------
 		class Node
