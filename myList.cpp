@@ -320,9 +320,9 @@ template<typename T>
 	}
 //---------------------------
 template<typename T>
-	LIST_Status myList<T>::fromFile(const std::string& file_name, T** data_o, int& index)
+	LIST_Status myList<T>::fromFile(const std::string& file_name, T** data_o, const int& size_arr, int& index)
 	{
-		*data_o = new T[Size];
+		*data_o = new T[size_arr];
 		int sz_var = sizeof(T);
 		index = 0;
 		ifstream in_f;

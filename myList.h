@@ -43,7 +43,7 @@ namespace mlst {
 		void Sort_1(bool f(T a, T b));
 
 		LIST_Status toFile(const std::string&);
-		LIST_Status fromFile(const std::string&, T**, int&);
+		LIST_Status fromFile(const std::string&, T**, const int&, int&);
 	private:
 		//------------
 		class Node
