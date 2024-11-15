@@ -49,7 +49,7 @@ int main()
 	{
 		cout << data_arr[i] << endl;
 	}
-
+	delete[] data_arr;
 	cin.get();
 }
 
