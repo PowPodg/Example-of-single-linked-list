@@ -344,7 +344,8 @@ template<typename T>
 					}
 					++index;
 				}
-				if (index > 1) --index;
+				if (index > 2) index-=1;
+				if (index > size_arr)return FILE_ERROR;
 			}
 			else
 			{
@@ -356,7 +357,8 @@ template<typename T>
 						in_f.read((char*)&(*data_o)[index], sz);
 						++index;
 					}
-					if (index > 1) --index;
+					if (index > 2) index -= 1;
+					if (index > size_arr)return FILE_ERROR;
 				}
 				else
 				{
