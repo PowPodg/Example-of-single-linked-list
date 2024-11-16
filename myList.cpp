@@ -320,9 +320,8 @@ template<typename T>
 	}
 //---------------------------
 template<typename T>
-	LIST_Status myList<T>::fromFile(const std::string& file_name, T** data_o, const int& size_arr, int& index)
+	LIST_Status myList<T>::fromFile(const std::string& file_name, T* data_o, const int& size_arr, int& index)
 	{
-		*data_o = new T[size_arr];
 		int sz_var = sizeof(T);
 		index = 0;
 		ifstream in_f;
@@ -340,7 +339,7 @@ template<typename T>
 					in_f.read(&data_read[0], sz);
 					for (size_t i = 0; i < sz; i++)
 					{
-						(*data_o)[index] += data_read[i];
+						data_o[index] += data_read[i];
 					}
 					++index;
 				}
@@ -354,7 +353,7 @@ template<typename T>
 					while (!in_f.eof()) {
 						int sz = 0;
 						in_f.read((char*)&sz, sizeof(sz));
-						in_f.read((char*)&(*data_o)[index], sz);
+						in_f.read((char*)&data_o[index], sz);
 						++index;
 					}
 					if (index > 2) index -= 1;
