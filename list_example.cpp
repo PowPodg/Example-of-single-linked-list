@@ -43,13 +43,14 @@ int main()
 	mlst.toFile(file_out);
 	//read from file to T array
 	int* data_arr = new int[zize_arr];
+	unique_ptr<int[]> pnt(data_arr);
 	int size_arr_f=0;
 	auto res = mlst.fromFile(file_out, data_arr, zize_arr, size_arr_f);
 	for (int i = 0; i < size_arr_f; i++)
 	{
 		cout << data_arr[i] << endl;
 	}
-	delete[] data_arr;
+	//delete[] data_arr;
 	cin.get();
 }
 
