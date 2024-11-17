@@ -56,8 +56,6 @@ namespace mlst {
 		//---------------
 		Node* Head;
 		int Size;
-
-	public:
 		//---------------------
 		class Iterator
 		{
@@ -97,6 +95,7 @@ namespace mlst {
 			Node* t_node;
 		};
 		//---------------------
+	public:
 		const Iterator begin() const {
 			return Iterator(Head);
 		}
