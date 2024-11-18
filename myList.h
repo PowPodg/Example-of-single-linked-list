@@ -27,10 +27,10 @@ namespace mlst {
 		~myList();
 
 		template <typename ... Arg>
-		myList(const Arg& ... in);
+		myList(const Arg& ... );
 
 		template <typename ... Arg>
-		void operator = (const Arg& ... in);
+		void operator = (const Arg& ... );
 
 		void add_back(T data);
 		void add_front(T data);
