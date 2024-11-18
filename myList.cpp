@@ -63,6 +63,13 @@ namespace mlst {
 			this->add_back(i);
 		}
 	}
+	//--------------------
+	template<typename T>
+	template<typename ...Arg>
+	myList<T>::myList(const Arg & ...in)
+	{
+		(this->add_back(in), ...);
+	}
 	//----------------------
 	template<typename T>
 	myList<T>::~myList()

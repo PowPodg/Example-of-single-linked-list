@@ -6,7 +6,8 @@ using namespace mlst;
 
 int main()
 {
-	myList<int>  mlst { 1, 3, 5 };
+	myList<int>  mlst( 1, 3, 5 );//variadic constructor
+	//myList<int>  mlst { 1, 3, 5 };
 	//Assigning new values
 	mlst = { 2, 44, 11 };
 

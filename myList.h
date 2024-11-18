@@ -26,6 +26,12 @@ namespace mlst {
 		void operator = (std::initializer_list<T>);
 		~myList();
 
+		template <typename ... Arg>
+		myList(const Arg& ... in);
+
+		template <typename ... Arg>
+		void operator = (const Arg& ... in);
+
 		void add_back(T data);
 		void add_front(T data);
 		LIST_Status insert_index(T data, const int index);
