@@ -52,6 +52,14 @@ int main()
 		cout << data_arr[i] << endl;
 	}
 	//delete[] data_arr;
+	//filling a new list with data from a file
+	myList<int>  new_mlst;
+	auto res1 = new_mlst.fromFile_async(file_out);
+	for (auto& i : new_mlst)
+	{
+		cout << i << endl;
+	}
+
 	cin.get();
 }
 

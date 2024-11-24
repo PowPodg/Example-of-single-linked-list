@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <fstream>
 #include <typeinfo>
+#include <future>
 
 namespace mlst {
 
@@ -49,7 +50,11 @@ namespace mlst {
 		void Sort_1(bool f(T a, T b));
 
 		LIST_Status toFile(const std::string&);
+		LIST_Status toFile_async(const std::string&);
+
 		LIST_Status fromFile(const std::string&, T*, const int&, int&);
+
+		LIST_Status fromFile_async(const std::string&);
 	private:
 		//------------
 		class Node

@@ -282,8 +282,8 @@ namespace mlst {
 		delete[] temp_arr;
 		temp_arr = nullptr;
 	}
-//----------------------------------------------------------------
-template<typename T>
+	//----------------------------------------------------------------
+	template<typename T>
 	LIST_Status myList<T>::toFile(const std::string& file_name)
 	{
 		int sz = sizeof(T);
@@ -299,7 +299,7 @@ template<typename T>
 				for (auto& it : *this)
 				{
 					string st = " "; st = it;
-					int sz_st = st.size();
+					size_t sz_st = st.size();
 					out_f.write((char*)&sz_st, sizeof(sz_st));
 					out_f.write(&st[0], sz_st);
 				}
@@ -317,6 +317,7 @@ template<typename T>
 				else
 				{
 					//for user objects ......Not yet implemented!!
+					out_f.close();
 					return FILE_ERROR;
 				}
 			}
@@ -325,8 +326,19 @@ template<typename T>
 		else return FILE_ERROR;
 		return LST_OK;
 	}
-//---------------------------
-template<typename T>
+	//------------------------------------------------
+	template<typename T>
+	LIST_Status myList<T>::toFile_async(const std::string& file_name)
+	{
+		LIST_Status res = FILE_ERROR;
+		auto async_to_file = std::async(std::launch::async, [&]() {
+			res = toFile(file_name);
+			});
+		async_to_file.get();
+		return res;
+	}
+	//---------------------------
+	template<typename T>
 	LIST_Status myList<T>::fromFile(const std::string& file_name, T* data_o, const int& size_arr, int& index)
 	{
 		int sz_var = sizeof(T);
@@ -350,7 +362,7 @@ template<typename T>
 					}
 					++index;
 				}
-				if (index > 2) index-=1;
+				if (index > 2) index -= 1;
 				if (index > size_arr)return FILE_ERROR;
 			}
 			else
@@ -369,6 +381,7 @@ template<typename T>
 				else
 				{
 					//for user objects ......Not yet implemented!!
+					in_f.close();
 					return FILE_ERROR;
 				}
 			}
@@ -376,6 +389,68 @@ template<typename T>
 		}
 		else return FILE_ERROR;
 		return LST_OK;
+	}
+	//-------------------------------------------------------
+	template<typename T>
+	LIST_Status myList<T>::fromFile_async(const std::string& file_name)
+	{
+		LIST_Status res = FILE_ERROR;
+		int sz_var = sizeof(T);
+		ifstream in_f;
+		in_f.open(file_name, ios_base::binary);
+
+		auto async_from_file = std::async(std::launch::async, [&]()
+			{
+				if (in_f.is_open()) {
+					auto tp = typeid(T).name();
+					string fin(tp);
+					if (strstr(fin.c_str(), "std::basic_string") != 0)
+					{
+						while (!in_f.eof()) {
+							int sz = 0;
+							in_f.read((char*)&sz, sizeof(sz));
+							string data_read(sz, ',');
+							in_f.read(&data_read[0], sz);
+							T data_temp = T();
+							if (sz)
+							{
+								for (size_t i = 0; i < sz; i++)
+								{
+									data_temp += data_read[i];
+								}
+								this->add_back(data_temp);
+							}
+						}
+					}
+					else
+					{
+						if (sz_var <= sizeof(int64_t))
+						{
+							while (!in_f.eof()) {
+								int sz = 0;
+								T data_temp = T();
+								in_f.read((char*)&sz, sizeof(sz));
+								if (sz)
+								{
+									in_f.read((char*)&data_temp, sz);
+									this->add_back(data_temp);
+								}
+							}
+						}
+						else
+						{
+							in_f.close();
+							//for user objects ......Not yet implemented!!
+							res = FILE_ERROR;
+						}
+					}
+					in_f.close();
+					res = LST_OK;
+				}
+				else res = FILE_ERROR;
+			});
+		async_from_file.get();
+		return res;
 	}
 }
 //--------------------------------------------------------
